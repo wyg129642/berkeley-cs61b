@@ -70,9 +70,10 @@ public class Planet {
      this.yyVel=this.yyVel+dt*fY/this.mass;
      this.yyPos=this.yyPos+this.yyVel*dt;
     }
-    public void draw(){
-        
+    private void draw(){
         StdDraw.picture(this.xxPos,this.yyPos, "images/"+this.imgFileName);
     }
-
+    public void publicdraw(){
+        draw();
+    }
 }
