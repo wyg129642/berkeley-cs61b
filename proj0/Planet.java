@@ -5,7 +5,7 @@ public class Planet {
     public double yyVel;
     public double mass;
     public String imgFileName;
-    private static double gravitational_constant=6.67e-11;
+    public static double gravitational_constant=6.67e-11;
     public Object draw;
     public Planet(double xP, double yP, double xV,
               double yV, double m, String img){
@@ -70,7 +70,7 @@ public class Planet {
      this.yyVel=this.yyVel+dt*fY/this.mass;
      this.yyPos=this.yyPos+this.yyVel*dt;
     }
-    private void draw(){
+    public void draw(){
         
         StdDraw.picture(this.xxPos,this.yyPos, "images/"+this.imgFileName);
     }
