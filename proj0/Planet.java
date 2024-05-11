@@ -73,7 +73,7 @@ public class Planet {
     private void draw(){
         StdDraw.picture(this.xxPos,this.yyPos, "images/"+this.imgFileName);
     }
-    public void publicdraw(){
-        draw();
+    public Object get_draw(){
+        return draw;
     }
 }

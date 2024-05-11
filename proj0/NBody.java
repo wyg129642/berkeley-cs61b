@@ -29,7 +29,7 @@ public class NBody {
         Planet[] allPlanets= readPlanets(filename);
         int number = allPlanets.length;
         for (int i=0; i<number; i++){
-            allPlanets[i].publicdraw();
+            allPlanets[i].get_draw();
         }
         double t=0;
         while (t< T){
@@ -54,7 +54,7 @@ public class NBody {
 
             StdDraw.picture(-10,10,"images/starfield.jpg");
             for (int i =0; i< number; i++){
-                allPlanets[i].publicdraw();
+                allPlanets[i].get_draw();
 
             }
             StdDraw.show();
