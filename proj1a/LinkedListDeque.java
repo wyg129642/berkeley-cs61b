@@ -1,8 +1,8 @@
 public class LinkedListDeque<T> {
-    private class Node {
-        public T item;
-        public Node next;
-        public Node last;
+    public class Node {
+        private T item;
+        private Node next;
+        private Node prev;
 
         public Node(T i, Node n) {
             item = i;
@@ -13,23 +13,9 @@ public class LinkedListDeque<T> {
     private int size;
     public LinkedListDeque(){
         sentinel = new Node(null, null);//需要修复
-        sentinel.last=sentinel;
+        sentinel.prev=sentinel;
         sentinel.next=sentinel;
         size = 0;
-    }
-
-    public void addFirst(T item) {
-        size += 1;
-        sentinel.next = new Node(item, sentinel.next);
-        sentinel.next.last = sentinel;
-        sentinel.next.next.last = sentinel.next;
-    }
-
-    public void addLast(T item) {
-        size += 1;
-        sentinel.last.next= new Node(item, sentinel);
-        sentinel.last.next.last = sentinel.last.next;
-        sentinel.last=sentinel.last.next;
     }
     public boolean isEmpty(){
         return size==0;
@@ -37,39 +23,69 @@ public class LinkedListDeque<T> {
     public int size(){
         return size;
     }
+    public void addFirst(T item) {
+        size += 1;
+        sentinel.next = new Node(item, sentinel.next);
+        sentinel.next.prev = sentinel;
+        sentinel.next.next.prev = sentinel.next;
+    }
+
+    public void addLast(T item) {
+        size += 1;
+        sentinel.prev.next= new Node(item, sentinel);
+        sentinel.prev.next.prev = sentinel.prev.next;
+        sentinel.prev=sentinel.prev.next;
+    }
+    public T removeFirst(){
+        if (isEmpty()){
+            return null;
+        }else{
+            size--;
+            T front =sentinel.next.item;
+            sentinel.next=sentinel.next.next;
+            sentinel.next.prev=sentinel;
+            return front;
+        }
+
+    }
+    public T removeLast(){
+        if (isEmpty()){
+            return null;
+        }else{
+            size--;
+            T back=sentinel.prev.item;
+            sentinel.prev=sentinel.prev.prev;
+            sentinel.prev.next=sentinel;
+            return back;
+        }
+    }
+    public T get(int index){
+        if (index>=size){
+            return null;
+        }
+        Node ptr=sentinel.next;
+        while(index!=0){
+            ptr=ptr.next;
+            index--;
+        }
+        return ptr.item;
+    }
     public void printDeque(){//感觉有问题
         while(sentinel.next.item != null){
             System.out.print(sentinel.item+" ");
             sentinel = sentinel.next;
         }
     }
-    public T removeFirst(){
-        size--;
-        T front =sentinel.next.item;
-        sentinel.next=sentinel.next.next;
-        sentinel.next.last=sentinel;
-        return front;
-    }
-    public T removeLast(){
-        size--;
-        T back=sentinel.last.item;
-        sentinel.last=sentinel.last.last;
-        sentinel.last.next=sentinel;
-        return back;
-    }
-    public T get(int index){
-        Node temp=sentinel.next;
-        while(index!=0){
-            temp=temp.next;
-            index--;
-        }
-        return temp.item;
-    }
+
     public T getRecursive(int index) {
-        if (index>0){
-            return sentinel.next.item;
-        } else{
-            return getRecursive(--index);
+            return getRecursive_help(sentinel, index);
+    }
+    public T getRecursive_help(Node ptr, int index){
+        if (index==0){
+            return ptr.next.item;
+        }
+        else{
+            return getRecursive_help(ptr.next, --index);
         }
     }
 }
