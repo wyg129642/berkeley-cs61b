@@ -44,12 +44,14 @@ public class LinkedListDeque<T> {
         }
     }
     public T removeFirst(){
+        size--;
         T front =sentinel.next.item;
         sentinel.next=sentinel.next.next;
         sentinel.next.last=sentinel;
         return front;
     }
     public T removeLast(){
+        size--;
         T back=sentinel.last.item;
         sentinel.last=sentinel.last.last;
         sentinel.last.next=sentinel;
