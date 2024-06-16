@@ -79,15 +79,18 @@ public class ArrayDeque<T> {
         return res;
     }
     public T get(int index) {
-        return items[index];
+        if (nextFirst+index+1 < items.length) {
+            return items[nextFirst+index+1];
+        } else {
+            return items[index-items.length+nextFirst+1];
+        }
     }
     public void printDeque() {
         if (nextFirst < nextLast) {
             for (int i = nextFirst+1; i < nextLast; i++) {
                 System.out.print(items[i] + " ");
             }
-        }
-        else {
+        } else {
             for (int i = nextFirst+1; i < items.length; i++) {
                 System.out.print(items[i] + " ");
             }
@@ -95,7 +98,6 @@ public class ArrayDeque<T> {
                 System.out.print(items[i] + " ");
             }
         }
-
     }
 
 }
