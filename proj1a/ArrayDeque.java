@@ -13,10 +13,10 @@ public class ArrayDeque<T> {
         if (usageRatio <0.25 && items.length >16) {
             T[] a = (T[]) new Object[items.length/2];
             if (nextFirst < nextLast) {
-                System.arraycopy(items, nextFirst+1, a, 0, size-nextLast-1);
+                System.arraycopy(items, nextFirst+1, a, 0, nextLast-nextFirst-1);
             } else {
-                System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
-                System.arraycopy(items, 0, a, size-nextFirst-1, nextLast);
+                System.arraycopy(items, nextFirst+1, a, 0, items.length-nextFirst-1);
+                System.arraycopy(items, 0, a, items.length-nextFirst-1, nextLast);
             }
             items = a;
             nextFirst = items.length -1;
@@ -58,7 +58,6 @@ public class ArrayDeque<T> {
         } else {
             nextFirst--;
         }
-        help_resize_down(usage_ratio());
     }
     public void addLast(T item) {
         if (size == items.length) {
@@ -71,7 +70,6 @@ public class ArrayDeque<T> {
         } else {
             nextLast++;
         }
-        help_resize_down(usage_ratio());
     }
     public T removeFirst() {
         if (size == 0) {
@@ -88,6 +86,7 @@ public class ArrayDeque<T> {
             items[nextFirst+1] = null;
             nextFirst++;
         }
+        help_resize_down(usage_ratio());
         return res;
 
     }
@@ -106,6 +105,7 @@ public class ArrayDeque<T> {
             items[nextLast-1] = null;
             nextLast--;
         }
+        help_resize_down(usage_ratio());
         return res;
     }
     public T get(int index) {
