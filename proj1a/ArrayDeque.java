@@ -6,7 +6,18 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
-    private void resize(){}
+    private void resize(){
+        T[] a = (T[]) new Object[items.length*4];
+        if (nextFirst == items.length -1) {
+            System.arraycopy(items, 0, a, 0, size);
+        } else {
+            System.arraycopy(items, 0, a, nextFirst+1, size-nextFirst);
+            System.arraycopy(items, size-nextFirst, a, 0, nextLast);
+        }
+        nextFirst = items.length -1;
+        nextLast = size;
+        items = a;
+    }
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
@@ -99,5 +110,14 @@ public class ArrayDeque<T> {
             }
         }
     }
-
+    public static void main(String[] args){
+        ArrayDeque test=new ArrayDeque();
+        test.addFirst(1);
+        test.addFirst(2);
+        test.addFirst(3);
+        test.addLast(7);
+        test.removeFirst();
+        test.printDeque();
+        System.out.println(test.get(0));
+    }
 }
