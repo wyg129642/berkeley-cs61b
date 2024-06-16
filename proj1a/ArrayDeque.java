@@ -11,12 +11,12 @@ public class ArrayDeque<T> {
         if (nextFirst == items.length -1) {
             System.arraycopy(items, 0, a, 0, size);
         } else {
-            System.arraycopy(items, 0, a, nextFirst+1, size-nextFirst);
-            System.arraycopy(items, size-nextFirst, a, 0, nextLast);
+            System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
+            System.arraycopy(items, 0, a, size-nextFirst-1, nextLast);
         }
+        items = a;
         nextFirst = items.length -1;
         nextLast = size;
-        items = a;
     }
     public ArrayDeque() {
         items = (T[]) new Object[8];
@@ -110,14 +110,19 @@ public class ArrayDeque<T> {
             }
         }
     }
-    public static void main(String[] args){
-        ArrayDeque test=new ArrayDeque();
-        test.addFirst(1);
-        test.addFirst(2);
-        test.addFirst(3);
-        test.addLast(7);
-        test.removeFirst();
-        test.printDeque();
-        System.out.println(test.get(0));
-    }
+//    public static void main(String[] args){
+//        ArrayDeque test=new ArrayDeque();
+//        test.addFirst(0);
+//        test.addLast(1);
+//        test.addLast(2);
+//        test.addLast(3);
+//        test.addFirst(4);
+//        test.addFirst(5);
+//        test.size();
+//        test.addFirst(7);
+//        test.addFirst(8);
+//        test.addLast(9);
+//        test.printDeque();
+//        System.out.println(test.get(1));
+//    }
 }
