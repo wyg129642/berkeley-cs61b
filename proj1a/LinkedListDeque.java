@@ -74,10 +74,10 @@
         }
         return ptr.item;
     }
-    private T getRecursive(int index) {
+    public T getRecursive(int index) {
         return getRecursiveHelp(sentinel, index);
     }
-    public T getRecursiveHelp(Node ptr, int index) {
+    private T getRecursiveHelp(Node ptr, int index) {
         if (index == 0) {
             return ptr.next.item;
         } else {
