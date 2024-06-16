@@ -6,6 +6,23 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
+    private double usage_ratio() {
+        return (double) size / items.length;
+    }
+    private void help_resize_down(double usageRatio){
+        if (usageRatio <0.25 && items.length >16) {
+            T[] a = (T[]) new Object[items.length/2];
+            if (nextFirst < nextLast) {
+                System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
+            } else {
+                System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
+                System.arraycopy(items, 0, a, size-nextFirst-1, nextLast);
+            }
+            items = a;
+            nextFirst = items.length -1;
+            nextLast = size;
+        }
+    }
     private void resize(){
         T[] a = (T[]) new Object[items.length*4];
         if (nextFirst == items.length -1) {
@@ -41,6 +58,7 @@ public class ArrayDeque<T> {
         } else {
             nextFirst--;
         }
+        help_resize_down(usage_ratio());
     }
     public void addLast(T item) {
         if (size == items.length) {
@@ -53,6 +71,7 @@ public class ArrayDeque<T> {
         } else {
             nextLast++;
         }
+        help_resize_down(usage_ratio());
     }
     public T removeFirst() {
         if (size == 0) {
@@ -112,6 +131,29 @@ public class ArrayDeque<T> {
     }
 //    public static void main(String[] args){
 //        ArrayDeque test=new ArrayDeque();
+//        test.addFirst(0);
+//        test.addLast(1);
+//        test.addLast(2);
+//        test.addLast(3);
+//        test.addFirst(4);
+//        test.addFirst(5);
+//        test.size();
+//        test.addFirst(7);
+//        test.addFirst(8);
+//        test.addLast(9);
+//        test.addFirst(0);
+//        test.addLast(1);
+//        test.addLast(2);
+//        test.addLast(3);
+//        test.addFirst(4);
+//        test.addFirst(5);
+//        test.size();
+//        test.addFirst(7);
+//        test.addFirst(8);
+//        test.addLast(9);
+//        test.addFirst(7);
+//        test.addFirst(8);
+//        test.addLast(9);
 //        test.addFirst(0);
 //        test.addLast(1);
 //        test.addLast(2);
