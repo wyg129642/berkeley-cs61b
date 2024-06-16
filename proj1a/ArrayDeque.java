@@ -13,7 +13,7 @@ public class ArrayDeque<T> {
         if (usageRatio <0.25 && items.length >16) {
             T[] a = (T[]) new Object[items.length/2];
             if (nextFirst < nextLast) {
-                System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
+                System.arraycopy(items, nextFirst+1, a, 0, size-nextLast-1);
             } else {
                 System.arraycopy(items, nextFirst+1, a, 0, size-nextFirst-1);
                 System.arraycopy(items, 0, a, size-nextFirst-1, nextLast);
