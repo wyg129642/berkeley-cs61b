@@ -9,7 +9,7 @@
         private Node next;
         private Node prev;
 
-        public Node(T i, Node n) {
+        private Node(T i, Node n) {
             item = i;
             next = n;
         }
@@ -74,7 +74,7 @@
         }
         return ptr.item;
     }
-    public T getRecursive(int index) {
+    private T getRecursive(int index) {
         return getRecursiveHelp(sentinel, index);
     }
     public T getRecursiveHelp(Node ptr, int index) {
