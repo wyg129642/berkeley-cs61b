@@ -23,7 +23,7 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome(""));
         assertTrue(palindrome.isPalindrome("a"));
     }
-    OffByOne cc = new OffByOne();
+    CharacterComparator cc = new OffByOne();
     @Test
     public void testisPalindrome2() {
         assertTrue(palindrome.isPalindrome("flake", cc ));
