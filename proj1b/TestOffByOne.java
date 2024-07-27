@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class TestOffByOne {
 
 
-    static OffByOne offByOne  = new OffByOne();
+    static CharacterComparator offByOne  = new OffByOne();
     @Test
     public void testOffByOne() {
         assertTrue(offByOne.equalChars('a','b'));
