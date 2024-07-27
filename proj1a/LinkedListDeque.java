@@ -14,7 +14,7 @@
             next = n;
         }
     }
-    private Node sentinel;
+    private Node sentinel;//good
     private int size;
     public LinkedListDeque() {
         sentinel = new Node(null, null); //需要修复
